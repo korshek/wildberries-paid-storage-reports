@@ -1,0 +1,14 @@
+services:
+  wb-api-worker:
+    build: .
+    ports:
+      - "5002:5002"
+    environment:
+      - FLASK_ENV=production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5002/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s 
